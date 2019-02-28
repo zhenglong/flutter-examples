@@ -16,13 +16,13 @@ class BannerWithEval {
 }
 
 class BannerWidget extends StatefulWidget {
-
-  List<BannerWithEval> data;
-  int height, delayTime, duration;
-  Curve curve;
-  ItemBuilder build;
-  IndicatorBuilder indicator;
-  OnClick onClick;
+  final List<BannerWithEval> data;
+  final int delayTime, duration;
+  final double ratio;
+  final Curve curve;
+  final ItemBuilder build;
+  final IndicatorBuilder indicator;
+  final OnClick onClick;
 
   BannerWidget({
     Key key,
@@ -31,7 +31,7 @@ class BannerWidget extends StatefulWidget {
     this.indicator,
     this.build,
     this.onClick,
-    this.height = 160,
+    this.ratio,
     this.delayTime = 4000,
     this.duration = 1000
   }) : super(key: key);
@@ -48,6 +48,7 @@ class BannerState extends State<BannerWidget> {
   int position, currentPage;
   List<BannerWithEval> bannerList = [];
   bool isRoll = true;
+  double height;
 
   @override
   void initState() {
@@ -61,7 +62,18 @@ class BannerState extends State<BannerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return null;
+    restData();
+    double height = MediaQuery.of(context).size.width * widget.ratio;
+    return Container(
+      height: height,
+      color: Colors.grey,
+      child: Stack(
+        children: <Widget>[
+          pageView(),
+          indicator()
+        ],
+      ),
+    );
   }
 
   Widget pageView() {
@@ -112,7 +124,8 @@ class BannerState extends State<BannerWidget> {
               return GestureDetector(
                 onTap: () => widget.onClick(current, bannerWithEval),
                 child: widget.build != null ? widget.build(current) : BannerItem(
-                  url: bannerWithEval.bannerUrl
+                  url: bannerWithEval.bannerUrl,
+                  height: height,
                 )
               );
             },
@@ -194,10 +207,12 @@ class BannerState extends State<BannerWidget> {
 }
 
 class BannerItem extends StatefulWidget {
-  String url;
+  final double height;
+  final String url;
   BannerItem({
     Key key,
-    @required this.url
+    @required this.url,
+    this.height
   }) : super(key: key);
 
   @override
@@ -212,7 +227,7 @@ class ItemState extends State<BannerItem> {
     return CachedNetworkImage(
       placeholder: (context, url) {
         return Container(
-          height: 160.0,
+          height: widget.height,
           width: double.infinity,
           color: Colors.black38,
           child: Center(
