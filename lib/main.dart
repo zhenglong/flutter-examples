@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
-import './swiper-demo.dart';
+import './flow-demo.dart';
 
 void main() => runApp(MyApp());
 
