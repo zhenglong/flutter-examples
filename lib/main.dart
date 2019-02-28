@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
-import './flow-demo.dart';
+import './flex-demo.dart';
 
 void main() => runApp(MyApp());
 
