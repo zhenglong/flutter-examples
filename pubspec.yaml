@@ -21,6 +21,7 @@ dependencies:
   cupertino_icons: ^0.1.2
 
   cached_network_image: ^0.6.1
+  after_layout: 1.0.7
 
 dev_dependencies:
   flutter_test:
