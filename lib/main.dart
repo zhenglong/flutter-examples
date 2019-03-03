@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
-import './animated-list.dart';
+import './hero-demo2.dart';
 
 void main() => runApp(MyApp());
 
@@ -18,10 +18,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return (DemoPage is MaterialApp) ? DemoPage() : MaterialApp(
+    Widget demoPage = DemoPage();
+    return (demoPage is MaterialApp) ? demoPage : MaterialApp(
         title: 'Flutter Demo',
         theme: defaultTargetPlatform == TargetPlatform.iOS ? kIOSTheme : kDefaultTheme,
-        home: DemoPage()
+        home: demoPage
     );
   }
 }
