@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
-import './hero-demo2.dart';
+import './stagger-animation-demo.dart';
 
 void main() => runApp(MyApp());
 
