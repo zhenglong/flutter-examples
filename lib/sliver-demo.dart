@@ -5,10 +5,10 @@ class DemoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Collapsing List Demo'),
-        ),
-        body: CollapsingList()
+//        appBar: AppBar(
+//          title: Text('Collapsing List Demo'),
+//        ),
+        body: SliverAppBarDemo()
     );
   }
 }
@@ -118,6 +118,35 @@ class CollapsingList extends StatelessWidget {
             Container(color: Colors.cyan, height: 150.0,),
             Container(color: Colors.indigo, height: 150.0,),
             Container(color: Colors.blue, height: 150.0,),
+          ]),
+        )
+      ],
+    );
+  }
+}
+
+class SliverAppBarDemo extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return CustomScrollView(
+      slivers: <Widget>[
+        SliverAppBar(
+          title: Text('SliverAppBar'),
+          backgroundColor: Colors.green,
+          expandedHeight: 200.0,
+          flexibleSpace: FlexibleSpaceBar(
+            background: Image.asset('images/chair-alpha.png', fit: BoxFit.cover,),
+          ),
+        ),
+        SliverFixedExtentList(
+          itemExtent: 150.0,
+          delegate: SliverChildListDelegate([
+            Container(color: Colors.red,),
+            Container(color: Colors.purple,),
+            Container(color: Colors.green,),
+            Container(color: Colors.orange,),
+            Container(color: Colors.yellow,),
+            Container(color: Colors.pink,),
           ]),
         )
       ],
