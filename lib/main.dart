@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
-import './stagger-animation-demo.dart';
+import './sliver-demo.dart';
 
 void main() => runApp(MyApp());
 
