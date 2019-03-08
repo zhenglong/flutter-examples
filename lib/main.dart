@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
-import './sliver-demo.dart';
+import './parse-json.dart';
 
 void main() => runApp(MyApp());
 
