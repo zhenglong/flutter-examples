@@ -10,7 +10,7 @@ class DemoPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: GradientAppBar(
-        gradientStart: Color(0xFF2171F5),
+        gradientStart: Color(0xFF21F1FF),
         gradientEnd: Color(0xFF49A2FC),
         title: Text('gradient app bar'),
         leading: Icon(Icons.ac_unit),
