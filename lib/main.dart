@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
-import './inherited-model-demo.dart';
+import './route-demo.dart';
 
 void main() => runApp(MyApp());
 
