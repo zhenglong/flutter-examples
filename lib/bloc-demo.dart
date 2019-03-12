@@ -61,10 +61,11 @@ class DemoPageContainer extends StatelessWidget {
       ),
       body: DemoContent(),
       floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            BlocProvider.of(context).increment();
-          },
-          child: Icon(Icons.add)
+        onPressed: () {
+          BlocProvider.of(context).increment();
+        },
+        child: Icon(Icons.add),
+        foregroundColor: Colors.white,
       ),
     );
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
-import './bloc-demo.dart';
+import './inherited-model-demo.dart';
 
 void main() => runApp(MyApp());
 
