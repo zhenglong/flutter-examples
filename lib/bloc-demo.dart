@@ -46,18 +46,40 @@ class DemoPageState extends State<DemoPage> {
 
   @override
   Widget build(BuildContext context) {
+    return BlocProvider(
+      child: DemoPageContainer(),
+    );
+  }
+}
+
+class DemoPageContainer extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('bloc-demo'),
       ),
-      body: BlocProvider(
-        child: StreamBuilder(
-          builder: (context, snapshot) {
-            return Text('${snapshot.data}');
+      body: DemoContent(),
+      floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            BlocProvider.of(context).increment();
           },
-          stream: BlocProvider.of(context).value,
-          initialData: 0,
-        ),
+          child: Icon(Icons.add)
+      ),
+    );
+  }
+}
+
+class DemoContent extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: StreamBuilder(
+        builder: (context, snapshot) {
+          return Text('${snapshot.data}', style: TextStyle(fontSize: 60),);
+        },
+        stream: BlocProvider.of(context).value,
+        initialData: 0,
       ),
     );
   }
