@@ -17,7 +17,7 @@ class StateContainer extends StatefulWidget {
 
   StateContainer({
     @required this.child,
-    this.repository = const TodosRepository(
+    this.repository = const TodosRepositoryFlutter(
       fileStorage: const FileStorage(
         'inherited_widget_sample',
         getApplicationDocumentsDirectory
@@ -48,7 +48,17 @@ class StateContainerState extends State<StateContainer> {
       state = AppState.loading();
     }
 
-    // TODO: call repository
+    widget.repository.loadTodos().then((loadedTodos) {
+      setState(() {
+        state = AppState(
+          todos: loadedTodos.map(Todo.fromEntity).toList()
+        );
+      });
+    }).catchError((err) {
+      setState(() {
+        state.isLoading = false;
+      });
+    });
   }
 
   @override

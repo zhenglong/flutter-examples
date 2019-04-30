@@ -1,5 +1,8 @@
 import 'package:uuid/uuid.dart';
 
+///
+/// 对应Todo的数据实体，面向数据持久化
+///
 class TodoEntity {
   String task;
   String id;
@@ -43,6 +46,9 @@ class TodoEntity {
   }
 }
 
+///
+/// Todo数据模型，能够与TodoEntity互转
+///
 class Todo {
   bool complete;
   String id;
@@ -54,6 +60,15 @@ class Todo {
 
   @override
   int get hashCode => complete.hashCode ^ task.hashCode ^ note.hashCode ^ id.hashCode;
+
+  Todo copyWith({bool complete, String id, String note, String task}) {
+    return Todo(
+      task ?? this.task,
+      complete: complete ?? this.complete,
+      id: id ?? this.id,
+      note: note ?? this.note
+    );
+  }
 
   @override
   bool operator ==(other) =>
@@ -83,8 +98,6 @@ class Todo {
     );
   }
 }
-
-
 
 enum AppTab { todos, state }
 
