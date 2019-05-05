@@ -3,6 +3,7 @@ import 'package:flutter_app/todoList/blocs.dart';
 import 'package:flutter_app/todoList/dependency_injection.dart';
 import 'package:flutter_app/todoList/models.dart';
 import 'package:flutter_app/todoList/screens/detail_screen.dart';
+import 'package:flutter_app/todoList/widgets/loading.dart';
 import 'package:flutter_app/todoList/widgets/todo_item.dart';
 import 'package:flutter_app/todoList/widgets/todos_bloc_provider.dart';
 
@@ -12,8 +13,11 @@ class TodoList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return null;
+    return StreamBuilder<List<Todo>>(
+      stream: TodosBlocProvider.of(context).visibleTodos,
+      builder: (context, snapshot) => snapshot.hasData 
+        ? _buildList(snapshot.data) : LoadingSpinner(key: Key('todosloading')),
+    );
   }
 
   ListView _buildList(List<Todo> todos) {
@@ -51,9 +55,27 @@ class TodoList extends StatelessWidget {
 
   void _removeTodo(BuildContext context, Todo todo) {
     TodosBlocProvider.of(context).deleteTodo(todo.id);
+    _showUndoSnackbar(context, todo);
   }
 
   void _showUndoSnackbar(BuildContext context, Todo todo) {
-    
+    final snackBar = SnackBar(
+      key: Key('snackBar'),
+      duration: Duration(seconds: 2),
+      backgroundColor: Theme.of(context).backgroundColor,
+      content: Text(
+        'deleted ${todo.task}',
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+      ),
+      action: SnackBarAction(
+        key: Key('snackbaraction_${todo.id}'),
+        label: 'Undo',
+        onPressed: () {
+          TodosBlocProvider.of(context).addTodo(todo);
+        },
+      ),
+    );
+    Scaffold.of(context).showSnackBar(snackBar);
   }
 }

@@ -2,14 +2,16 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app/todoList/blocs.dart';
+import 'package:flutter_app/todoList/dependency_injection.dart';
 import 'package:flutter_app/todoList/models.dart';
 import 'package:flutter_app/todoList/widgets/filter_button.dart';
+import 'package:flutter_app/todoList/widgets/stats_counter.dart';
+import 'package:flutter_app/todoList/widgets/todo_list.dart';
 import 'package:flutter_app/todoList/widgets/todos_bloc_provider.dart';
 
 class HomeScreen extends StatefulWidget {
-  final void Function() onInit;
 
-  HomeScreen({@required this.onInit})
+  HomeScreen()
     : super(key: const Key('homeScreen'));
 
   @override
@@ -50,6 +52,35 @@ class HomeScreenState extends State<HomeScreen> {
               activeTabSnapshot,
               true
             ),
+          ),
+          body: activeTabSnapshot.data == AppTab.todos ? TodoList() 
+            : StatsCounter(
+              buildBloc: () => StatsBloc(Injector.of(context).todosInteractor),
+            ),
+          floatingActionButton: FloatingActionButton(
+            key: Key('addtodofab'),
+            onPressed: () {
+              Navigator.pushNamed(context, '/addTodo');
+            },
+            child: Icon(Icons.add),
+          ),
+          bottomNavigationBar: BottomNavigationBar(
+            key: Key('tabs'),
+            currentIndex: AppTab.values.indexOf(activeTabSnapshot.data),
+            onTap: (index) {
+              tabController.add(AppTab.values[index]);
+            },
+            items: AppTab.values.map((tab) {
+              return BottomNavigationBarItem(
+                icon: Icon(
+                  tab == AppTab.todos ? Icons.list : Icons.show_chart,
+                  key: tab == AppTab.state ? Key('statsTab') : Key('todoTab')
+                ),
+                title: Text(
+                  tab == AppTab.state ? 'stats' : 'todos'
+                )
+              );
+            }).toList()
           ),
         );
       },
