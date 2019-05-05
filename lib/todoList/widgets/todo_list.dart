@@ -32,6 +32,9 @@ class TodoList extends StatelessWidget {
           onDismissed: (direction) {
             _removeTodo(context, todo);
           },
+          onCheckboxChanged: (complete) {
+            TodosBlocProvider.of(context).updateTodo(todo.copyWith(complete: !todo.complete));
+          },
           onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute(
