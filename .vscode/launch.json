@@ -8,7 +8,7 @@
             "name": "Flutter",
             "request": "launch",
             "type": "dart",
-            "program": "lib/todoList/main_local_storage.dart"
+            "program": "lib/main.dart"
         }
     ]
 }

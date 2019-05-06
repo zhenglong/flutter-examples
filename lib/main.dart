@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
-import './route-demo.dart';
+import './animation-demo.dart';
 
 void main() => runApp(MyApp());
 
