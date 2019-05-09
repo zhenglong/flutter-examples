@@ -26,6 +26,7 @@ dependencies:
   uuid: 2.0.0
   path_provider: any
   rxdart: any
+  fluttertoast: any
 
 dev_dependencies:
   flutter_test:
@@ -33,6 +34,7 @@ dev_dependencies:
 
   build_runner: ^1.0.0
   json_serializable: ^2.0.0
+  transparent_image: any
 
 
 # For information on the generic Dart part of this file, see the
@@ -51,6 +53,7 @@ flutter:
     - images/beachball-alpha.png
     - images/binoculars-alpha.png
     - images/chair-alpha.png
+    - assets/mock/jk_daily_cards.json
 
   # To add assets to your application, add an assets section, like this:
   # assets:

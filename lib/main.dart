@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
-import './animation-demo.dart';
+// import './animation-demo.dart';
+import './jike/index.dart';
 
 void main() => runApp(MyApp());
 

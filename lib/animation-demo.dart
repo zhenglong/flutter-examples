@@ -78,7 +78,7 @@ class AnimationView extends CustomPainter {
   AnimationView(this.context, double r) {
     _paint = new Paint();
     _paint.color = Colors.deepOrange;
-    _paint.style = PaintingStyle.fill;
+    // _paint.style = PaintingStyle.stroke;
     _R = r;
   }
 
@@ -104,7 +104,8 @@ class AnimationView extends CustomPainter {
       Point<double>(-t*cos(54*radian), t*sin(54*radian)) // CC
     ];
 
-    return arr.asMap().map((index, p) => MapEntry(index, index % 2 == 0 ? Point<double>(p.x * _R, p.y * _R) : Point<double>(p.x * 125, p.y * 125))).values.toList();
+    return arr.asMap().map((index, p) => 
+      MapEntry(index, index % 2 == 0 ? Point<double>(p.x * _R, p.y * _R) : Point<double>(p.x * 125, p.y * 125))).values.toList();
   }
 
   void paint(Canvas canvas, Size size) {
