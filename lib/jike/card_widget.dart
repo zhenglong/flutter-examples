@@ -20,7 +20,7 @@ class CardStackWidget extends StatefulWidget {
     this.cardList,
     this.cardCount = 2,
     this.offset = 10,
-    this.cardPadding = const EdgeInsets.only(left: 20, right: 20, top: 60)
+    this.cardPadding = const EdgeInsets.only(left: 20, right: 20, top: 50)
   }) : assert(cardPadding != null),
        assert(cardCount != null),
        assert(offset != null),
@@ -78,6 +78,7 @@ class _CardStackWidgetState extends State<CardStackWidget> with TickerProviderSt
         double endX, endY;
         if (_totalDx.abs() > _totalDy.abs()) {
           endX = context.size.width * _totalDx.sign;
+          // 如果越是接近水平滑动，则卡片被移除的越快
           endY = _totalDy.sign * context.size.width * _totalDy.abs() / _totalDx.abs();
         } else {
           endY = context.size.height * _totalDy.sign;
@@ -157,6 +158,7 @@ class _CardStackWidgetState extends State<CardStackWidget> with TickerProviderSt
     int length = widget.cardList.length;
     int count = min(length, widget.cardCount);
     for (int i = 0; i < count; i++) {
+      // 用户可以拖动最上面的卡片，所以dx/dy与其它卡片不同
       double dx = i == 0 ? _totalDx : -_ratio * widget.offset;
       double dy = i == 0 ? _totalDy : _ratio * widget.offset;
       Widget cardWidget = _CardWidget(
@@ -166,6 +168,7 @@ class _CardStackWidgetState extends State<CardStackWidget> with TickerProviderSt
         dy: dy,
         offset: widget.offset,
       );
+      // 最上面卡片支持手势
       if (i == 0) {
         cardWidget = RawGestureDetector(
           gestures: _cardGestures,
@@ -179,6 +182,7 @@ class _CardStackWidgetState extends State<CardStackWidget> with TickerProviderSt
         padding: widget.cardPadding,
       ));
     }
+    // stack中的元素，越往后面z-index越高，所以需要把列表反转
     return Stack(
       children: children.reversed.toList(),
     );
@@ -209,7 +213,7 @@ class _CardWidget extends StatelessWidget {
       child: Transform(
         transform: Matrix4.translationValues(
           dx + (offset * position.toDouble()), 
-          dy + (-offset * position.toDouble()), 
+          dy + (offset * position.toDouble()), 
           0),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10),

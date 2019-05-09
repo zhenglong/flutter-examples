@@ -137,7 +137,7 @@ class _HomePagerState extends State<HomePager> {
             left: 0,
             right: 0,
             child: Container(
-              height: 100,
+              height: 50,
               padding: EdgeInsets.only(left: 20, right: 20),
               child: _createOptMenus(),
             ),
@@ -145,7 +145,8 @@ class _HomePagerState extends State<HomePager> {
           CardStackWidget(
             cardList: _cardList,
             offset: 8,
-            cardCount: 2,
+            cardCount: 3,
+            cardPadding: EdgeInsets.only(left: 20, right: 40, top: 50)
           )
         ],
       );
