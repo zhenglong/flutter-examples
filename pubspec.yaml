@@ -54,6 +54,18 @@ flutter:
     - images/binoculars-alpha.png
     - images/chair-alpha.png
     - assets/mock/jk_daily_cards.json
+    - assets/images/frappe.png
+    - assets/images/glass.png
+    - assets/images/frappe_with_straw.png
+    - assets/images/glass_with_straw.png
+
+  fonts:
+    - family: ionicons
+      fonts:
+        - asset: assets/fonts/ionicons.ttf
+    - family: fontello
+      fonts:
+        - asset: assets/fonts/fontello.ttf
 
   # To add assets to your application, add an assets section, like this:
   # assets:
